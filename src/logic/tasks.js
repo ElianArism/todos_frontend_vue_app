@@ -1,29 +1,31 @@
+// << Peticiones al Backend >>
+
+// imports necesarios
 import axios from 'axios'
-// const api = 'http://localhost:3000';
-let api;
+import api from '../../env'
 
 export default {
+    // GET 
     getTasks () {
         return axios.get(`${api}/task`); 
     },
-    
-    postTask (task) {
-        return axios.post(`${api}/task`, task); 
-    },
-    
-    putTask (data, id) {
-        return axios.put(`${api}/task/${id}`, data);
-    },
-
-    deleteTask (id) {
-        return axios.delete(`${api}/task/${id}`);  
-    }, 
 
     getFeaturedTasks () {
         return axios.get(`${api}/featured`);
     },
-    getFinishedTasks () {
-        return axios.get(`${api}/finished`);
-    }
 
+    // POST 
+    postTask (task) {
+        return axios.post(`${api}/task`, task); 
+    },
+    
+    // PUT 
+    putTask (data, id) {
+        return axios.put(`${api}/task/${id}`, data);
+    },
+
+    // DELETE
+    deleteTask (id) {
+        return axios.delete(`${api}/task/${id}`);  
+    }
 }

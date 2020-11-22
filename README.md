@@ -1,21 +1,16 @@
-# todos_app
+# To Do List 
+> Este es un proyecto de Vue.js
 
-> A Vue.js project
+## Configuracion necesaria
 
-## Build Setup
-
-``` bash
-# install dependencies
+# Antes de iniciar ejecutar este comando en la consola (dentro de la carpeta del proyecto) para instalar las dependencias
+```
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# Iniciar aplicacion en http://localhost:8080
+```
+npm run dev
+```
+
+# Url de la aplicacion en produccion: https://confident-euler-1d2bd4.netlify.app

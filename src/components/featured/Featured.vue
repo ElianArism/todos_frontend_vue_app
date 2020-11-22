@@ -1,88 +1,111 @@
 <template>
-    <el-container>
-        <el-main :class="darkmode?'dark':'light'">
-            <el-row>
-                <el-col>
-                    <h1>Tu lista de tareas destacadas</h1>
-                    <el-divider></el-divider>
-                    <new-to-do v-for="(t,key) in featuredTasks" :key="key" :task="t" @updatetab="updateFeaturedList">
-                    </new-to-do>
-                </el-col>
-            </el-row>
-        </el-main>
-   </el-container>
+  <!-- Contenedor -->
+  <el-container>
+    
+    <!-- Main -->
+    <el-main :class="darkmode ? 'dark' : 'light'">
+        
+        <el-col>
+          <h1>Tu lista de tareas destacadas</h1>
 
+          <!-- Linea divisoria -->
+          <el-divider></el-divider>
+          
+          <!-- Componente de tareas -->
+          <new-to-do
+            v-for="(t, key) in featuredTasks"
+            :key="key"
+            :task="t"
+            @updatetab="updateFeaturedList"
+            :featured="true"
+          >
+          </new-to-do>
+          <!-- Fin componente de tareas -->
+        </el-col>   
+    
+    </el-main>
+    <!-- Fin main -->
+
+  </el-container>
+  <!-- Fin contenedor -->
 </template>
 
 <script>
-import Sidebar from '../sidebar/Sidebar'
-import NewToDo from '../home/to-do/NewTo-do'
-import tasks from '../../logic/tasks'
+// imports
+import Sidebar from "../sidebar/Sidebar"
+import NewToDo from "../home/to-do/NewTo-do"
+import tasks from "../../logic/tasks"
+
 export default {
-    data () {
-      return {
-          colorText: 'black', 
-          bgColor: '#eeeeee',
-          featuredTasks: null, 
-      }
-  }, 
-  components: {Sidebar, NewToDo},
-  props:{
-    darkmode: {
-        type: Boolean
+  components: { 
+    Sidebar,
+    NewToDo
+  },
+  data() {
+    return {
+      colorText: "black",
+      bgColor: "#eeeeee",
+      featuredTasks: null
     }
   },
-  methods: {
-      async updateFeaturedList () {
-        let response = await tasks.getFeaturedTasks(); 
-        this.featuredTasks = response.data.tasksList; 
-      }
-  },
-  async created () {
-    let response = await tasks.getFeaturedTasks(); 
+  // Al crear componente actualizar lista de tareas destacadas   
+  async created() {
+    let response = await tasks.getFeaturedTasks();
     this.featuredTasks = response.data.tasksList;
-  }
+  },
+  methods: {
+    // Actualizar lista de tareas destacadas
+    async updateFeaturedList() {
+      let response = await tasks.getFeaturedTasks();
+      this.featuredTasks = response.data.tasksList;
+    }
+  },
+  props: {
+    darkmode: {
+      type: Boolean
+    }
+  },
 }
 </script>
 
 <style media="screen">
-    .el-container {
-        height: 100vh;
-        width: 80%;
-        font-family: 'Roboto', sans-serif;
-    }
-    .el-main {
-        background-color: #eeeeee;
-    }
-    .el-row:nth-child(2) {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .el-col {
-        display: flex;
-        align-items:flex-start;
-        flex-direction: column;
-    }
-    .el-row h1 {
-        margin: 0 auto 20px auto;
-    }
-    .container {
-        width: auto;
-    }
-    
-    .light {
-        color: black; 
-        background-color: #eeeeee; 
-    }
-    .dark {
-        color: white; 
-        background-color: #222831 !important; 
-    }
+/* Estilos generales */
+h1 {
+    margin: 20px auto;
+}
 
-    @media screen and (max-width:700px) {
-        .el-container {
-            width: 100%;
-            font-size: 15px; 
-        }
-    } 
+/* Estilos del componente */
+.el-container {
+  height: 100vh;
+  width: 80%;
+  font-family: "Roboto", sans-serif;
+}
+
+.el-main {
+  background-color: #eeeeee;
+}
+
+.el-col {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+/* Estilos modo claro/oscuro */
+.light {
+  color: black;
+  background-color: #eeeeee;
+}
+.dark {
+  color: white;
+  background-color: #222831 !important;
+}
+
+/* Responsive */
+@media screen and (max-width: 700px) {
+  .el-container {
+    width: 100%;
+    font-size: 15px;
+  }
+}
 </style>
