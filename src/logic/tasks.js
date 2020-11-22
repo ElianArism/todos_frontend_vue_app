@@ -1,5 +1,6 @@
 import axios from 'axios'
-const api = 'http://localhost:3000';
+// const api = 'http://localhost:3000';
+let api;
 
 export default {
     getTasks () {

@@ -1,4 +1,5 @@
 // imports 
+require('./config/config');
 const express = require('express'); 
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose'); 
@@ -16,10 +17,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
-// conexion a la base de datos
-const urlDB = 'mongodb://localhost:27017/toDoList';  
+// conexion a la base de datos  
 
-mongoose.connect(urlDB, {
+mongoose.connect(process.env.URLDB, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -34,7 +34,7 @@ mongoose.connect(urlDB, {
 app.use(require('./routes/task.routes'));
 
 // levantar servidor 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en el puerto 3000`);
 })
 
