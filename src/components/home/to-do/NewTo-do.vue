@@ -1,7 +1,7 @@
 <template>
   <!-- Row principal -->
   <el-row v-if="task">
-
+      
     <!-- Cuerpo de la tarea -->
     <div class="todo" v-bind:class="{ finish: task.isFinished }">
 
@@ -68,7 +68,7 @@ import tasks from "../../../logic/tasks";
 export default {
   data() {
     return {
-      finTask: false
+      finTask: false,
     };
   },
   methods: {

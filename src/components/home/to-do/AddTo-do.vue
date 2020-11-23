@@ -14,6 +14,10 @@
     <!-- Linea divisoria -->
     <el-divider></el-divider>
 
+    <!-- Spinner -->
+      <spinner v-if="!tasksList"></spinner>
+    <!-- Fin spinner -->
+
     <!-- Componente de tareas -->
     <new-to-do
       v-for="(t, key) in tasksList"
@@ -21,6 +25,7 @@
       :task="t"
       @edittask="activateEditMode"
       @updatetab="updateTasksList"
+      v-else
     >
     </new-to-do>
     <!-- Fin componente de tareas -->
@@ -30,14 +35,18 @@
 
 <script>
 // imports
-import NewToDo from "./NewTo-do";
-import tasks from "../../../logic/tasks";
+import NewToDo from "./NewTo-do"
+import tasks from "../../../logic/tasks"
+import Spinner from "../../Spinner"
 
 export default {
-  components: { NewToDo },
+  components: { 
+    NewToDo,
+    Spinner
+  },
   data() {
     return {
-      tasksList: [],
+      tasksList: null,
       editMode: false,
       newTask: {
         info: "",
@@ -49,7 +58,7 @@ export default {
   //Cargar tareas al crear componente   
   async created() {
     const response = await tasks.getTasks();
-    this.tasksList = response.data.tasksList;
+    this.tasksList = response.data.tasksList;  
   },
   methods: {
     // Actualizar tareas

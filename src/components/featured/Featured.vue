@@ -11,6 +11,10 @@
           <!-- Linea divisoria -->
           <el-divider></el-divider>
           
+          <!-- Spinner -->
+            <spinner v-if="!featuredTasks"></spinner>
+          <!-- Fin spinner -->
+
           <!-- Componente de tareas -->
           <new-to-do
             v-for="(t, key) in featuredTasks"
@@ -18,6 +22,7 @@
             :task="t"
             @updatetab="updateFeaturedList"
             :featured="true"
+            v-else
           >
           </new-to-do>
           <!-- Fin componente de tareas -->
@@ -35,23 +40,26 @@
 import Sidebar from "../sidebar/Sidebar"
 import NewToDo from "../home/to-do/NewTo-do"
 import tasks from "../../logic/tasks"
+import Spinner from "../Spinner"
 
 export default {
   components: { 
     Sidebar,
-    NewToDo
+    NewToDo,
+    Spinner
   },
   data() {
     return {
       colorText: "black",
       bgColor: "#eeeeee",
-      featuredTasks: null
+      featuredTasks: null,
     }
   },
   // Al crear componente actualizar lista de tareas destacadas   
   async created() {
     let response = await tasks.getFeaturedTasks();
     this.featuredTasks = response.data.tasksList;
+
   },
   methods: {
     // Actualizar lista de tareas destacadas
